@@ -1,0 +1,76 @@
+#-----------------------------------
+--- # Application
+#-----------------------------------
+
+server:
+  port: 8080
+
+#-----------------------------------
+--- # Authentication
+#-----------------------------------
+
+application:
+  security:
+    uuid: b592691e-df3f-4049-86d5-50bdce269354
+    strength: 8
+    system-username: SYSTEM
+    system-password: $2a$16$Pjg5ZRu.I2TsN5W38PMyQuYBorSrwmRKa/4fc01nEZl0FSOQeou3C # SYSADM
+
+#-----------------------------------
+--- # Database
+#-----------------------------------
+
+# database config for production (only on Docker, because in this case I dont have the notes-app db on my postgre server)
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/notes-app
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+# database config for development (local) 
+# spring:
+#   datasource:
+#     url: jdbc:h2:mem:notes-app
+#     driver-class-name: org.h2.Driver
+#     username: user
+#     password: password
+#   jpa:
+#     hibernate:
+#       ddl-auto: create-drop
+#     database-platform: org.hibernate.dialect.H2Dialect
+
+#-----------------------------------
+--- # i18n & L10n
+#-----------------------------------
+
+spring:
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
+
+#-----------------------------------
+--- # Logging
+#-----------------------------------
+
+logging:
+  level:
+    com:
+      tujuhsembilan: TRACE
+
+#-----------------------------------
+--- # Miscellanous
+#-----------------------------------
+
+spring:
+  output:
+    ansi:
+      enabled: always # Just console color, I'm lovin' it!
+
+# # -----------------------------------
+# --- #
+# # -----------------------------------

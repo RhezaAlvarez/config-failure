@@ -1,0 +1,8 @@
+target
+src/main/resources
+.vscode
+.mvn
+.gitignore
+mvnw
+mvnw.cmd
+.dockerignore
