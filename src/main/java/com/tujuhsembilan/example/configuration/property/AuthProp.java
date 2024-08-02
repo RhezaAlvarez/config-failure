@@ -8,8 +8,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.util.UUID;
-
 @Validated
 @Data
 @Component
@@ -17,11 +15,11 @@ import java.util.UUID;
 public class AuthProp {
 
   @NotBlank
-  private String uuid = "b592691e-df3f-4049-86d5-50bdce269354";
+  private String uuid;
 
   @Min(8)
   private Integer strength = 8;
 
-  private String systemUsername = "SYSTEM";
-  private String systemPassword = "$2a$16$Pjg5ZRu.I2TsN5W38PMyQuYBorSrwmRKa/4fc01nEZl0FSOQeou3C";
+  private String systemUsername;
+  private String systemPassword;
 }

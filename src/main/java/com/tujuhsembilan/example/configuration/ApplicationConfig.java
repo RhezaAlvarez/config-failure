@@ -1,6 +1,8 @@
 package com.tujuhsembilan.example.configuration;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 
 import org.modelmapper.ModelMapper;
@@ -27,6 +29,7 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.util.ResourceUtils;
 
 import com.nimbusds.jose.jwk.ECKey;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -101,29 +104,29 @@ public class ApplicationConfig {
 
   @Bean
   public ECKey ecJwk() throws IOException, ParseException {
-    // try (var in = new FileInputStream(ResourceUtils.getFile("classpath:key/ES512.json"))) {
-    //   return ECKey.parse(new String(in.readAllBytes(), StandardCharsets.UTF_8));
-    // }
+    try (var in = new FileInputStream(ResourceUtils.getFile("/opt/key/ES512.json"))) {
+      return ECKey.parse(new String(in.readAllBytes(), StandardCharsets.UTF_8));
+    }
     // Resource resource = new ClassPathResource("key/ES512.json");
     // try (Reader reader = new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)) {
     //   String json = FileCopyUtils.copyToString(reader);
     //   return ECKey.parse(json);
     // }
     // TIDAK BISA MENGAMBIL PATH ES512.json ketika sudah didalam jar
-    String json = "{\n" +
-                  "  \"kty\": \"EC\",\n" +
-                  "  \"d\": \"AIOLVk_GmSdLx96trJvMtWuctepy0Q7lvmkN1Zp7dZGEPEDG-57X5fnkkIZiW-KDZOSXaocLrCKlK8IlqIDT5Zyg\",\n" +
-                  "  \"use\": \"sig\",\n" +
-                  "  \"crv\": \"P-521\",\n" +
-                  "  \"kid\": \"b592691e-df3f-4049-86d5-50bdce269354\",\n" +
-                  "  \"key_ops\": [\n" +
-                  "    \"verify\",\n" +
-                  "    \"sign\"\n" +
-                  "  ],\n" +
-                  "  \"x\": \"AdRfJfpTP5onoF1G_hH5MIeCqObaCko8R41JtoRDmEewrcem3EJzu-37qkXc98sUnp0C_NhW7IgBGarVRZ_8q1ER\",\n" +
-                  "  \"y\": \"AO8jMxZsw4ZqSCjzL4e9gDE0rIwaAhM-palA9HUK7CKPS0qrGJ0ACXQ1t5M_u5U0HruHbur8u3nwVJTn2FfU_bl5\"\n" +
-                  "}";
-    return ECKey.parse(json);
+    // String json = "{\n" +
+    //               "  \"kty\": \"EC\",\n" +
+    //               "  \"d\": \"AIOLVk_GmSdLx96trJvMtWuctepy0Q7lvmkN1Zp7dZGEPEDG-57X5fnkkIZiW-KDZOSXaocLrCKlK8IlqIDT5Zyg\",\n" +
+    //               "  \"use\": \"sig\",\n" +
+    //               "  \"crv\": \"P-521\",\n" +
+    //               "  \"kid\": \"b592691e-df3f-4049-86d5-50bdce269354\",\n" +
+    //               "  \"key_ops\": [\n" +
+    //               "    \"verify\",\n" +
+    //               "    \"sign\"\n" +
+    //               "  ],\n" +
+    //               "  \"x\": \"AdRfJfpTP5onoF1G_hH5MIeCqObaCko8R41JtoRDmEewrcem3EJzu-37qkXc98sUnp0C_NhW7IgBGarVRZ_8q1ER\",\n" +
+    //               "  \"y\": \"AO8jMxZsw4ZqSCjzL4e9gDE0rIwaAhM-palA9HUK7CKPS0qrGJ0ACXQ1t5M_u5U0HruHbur8u3nwVJTn2FfU_bl5\"\n" +
+    //               "}";
+    // return ECKey.parse(json);
   }
 
   @Bean

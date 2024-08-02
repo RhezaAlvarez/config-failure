@@ -2,8 +2,8 @@
 --- # Application
 #-----------------------------------
 
-server:
-  port: 8080
+# server:
+#   port: 8080
 
 #-----------------------------------
 --- # Authentication
@@ -23,7 +23,7 @@ application:
 # database config for production (only on Docker, because in this case I dont have the notes-app db on my postgre server)
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/notes-app
+    url: jdbc:postgresql://database:5432/notes-app
     username: user
     password: password
     driver-class-name: org.postgresql.Driver
